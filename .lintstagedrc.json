@@ -1,0 +1,5 @@
+{
+    "*.ts": "npx tsc --noEmit",
+    "*.{js,jsx,ts,tsx}": "npm run lint",
+    "*.{js,jsx,ts,tsx,html,css}": "npm run format"
+}

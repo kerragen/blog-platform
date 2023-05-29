@@ -1,17 +1,17 @@
 .articlesContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .articles {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    row-gap: 26px;
-    padding: 26px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 26px;
+  padding: 26px 0;
 }
 
 .articlesSpin {
-    margin-top: 30vh;
+  margin-top: 30vh;
 }

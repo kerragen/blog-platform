@@ -1,149 +1,142 @@
 .article {
+  padding: 15px 16px 24px 16px;
+  width: 941px;
+  height: 140px;
+  filter: drop-shadow(0px 7px 12px rgba(0, 0, 0, 0.15));
+  border-radius: 5px;
+  background-color: #ffffff;
+
+  &Full {
+    height: auto;
     padding: 15px 16px 24px 16px;
     width: 941px;
-    height: 140px;
     filter: drop-shadow(0px 7px 12px rgba(0, 0, 0, 0.15));
     border-radius: 5px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
+  }
 
-    &Full {
-        height: auto;
-        padding: 15px 16px 24px 16px;
-        width: 941px;
-        filter: drop-shadow(0px 7px 12px rgba(0, 0, 0, 0.15));
-        border-radius: 5px;
-        background-color: #FFFFFF;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    color: rgba(24, 144, 255, 1);
+    font-size: 20px;
+    text-decoration: none;
+    display: inline-flex;
+    max-width: 700px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 12px;
+
+    &:hover {
+      color: rgba(20, 105, 255, 1);
     }
+  }
 
-    &__header {
-        display: flex;
-        justify-content: space-between;
+  &__likes {
+    font-size: 12px;
+    color: #262626;
+    display: inline-flex;
+    align-items: center;
+    column-gap: 5px;
+  }
 
-    }
+  &__like {
+    width: 14px;
+    height: 15px;
+  }
 
-    &__title {
-        color: rgba(24, 144, 255, 1);
-        font-size: 20px;
-        text-decoration: none;
-        display: inline-flex;
-        max-width: 700px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-right: 12px;
+  &__likeOff {
+    fill: transparent;
+    stroke: #262626;
+    transition: fill, 0.2s, stroke 0.2s;
+    stroke-width: 1;
+  }
 
-        &:hover {
-            color: rgba(20, 105, 255, 1);
-        }
+  &__likeOn {
+    fill: #ff0707;
+    transition: fill, 0.2s;
+  }
 
-    }
+  &__tags {
+    display: flex;
+    column-gap: 8px;
+    margin: 4px 0;
+  }
 
-    &__likes {
-        font-size: 12px;
-        color: #262626;
-        display: inline-flex;
-        align-items: center;
-        column-gap: 5px;
+  &__tag {
+    font-size: 12px;
+    color: #262626;
+    border: 1px solid #262626;
+    border-radius: 2px;
+    padding: 2px 4px;
+  }
 
-    }
+  &__tagFull {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    padding: 2px 4px;
+  }
 
-    &__like {
-        width: 14px;
-        height: 15px;
-    }
+  &__info {
+    display: flex;
+    column-gap: 12px;
+    align-items: center;
+  }
 
-    &__likeOff {
-        fill: transparent;
-        stroke: #262626;
-        transition: fill, 0.2s, stroke 0.2s;
-        stroke-width: 1;
-    }
+  &__date {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+  }
 
-    &__likeOn {
-        fill: #ff0707;
-        transition: fill, 0.2s;
-    }
+  &__avatar {
+    display: flex;
+  }
 
-    &__tags {
-        display: flex;
-        column-gap: 8px;
-        margin: 4px 0;
+  &__user {
+    font-size: 18px;
+  }
 
-    }
+  &__img {
+    width: 46px;
+    height: 46px;
+    border-radius: 25px;
+  }
 
-    &__tag {
-        font-size: 12px;
-        color: #262626;
-        border: 1px solid #262626;
-        border-radius: 2px;
-        padding: 2px 4px;
-    }
+  &__text {
+    font-size: 13px;
+    color: #262626;
+    width: 682px;
+    line-height: 22px;
+    max-height: 45px;
+    overflow: hidden;
+  }
 
-    &__tagFull {
-        font-size: 12px;
-        color: rgba(0, 0, 0, 0.5);
-        border: 1px solid rgba(0, 0, 0, 0.5);
-        border-radius: 2px;
-        padding: 2px 4px;
-    }
+  &__dark {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    flex-grow: 1;
+  }
 
-    &__info {
-        display: flex;
-        column-gap: 12px;
-        align-items: center;
+  &__body {
+    display: flex;
+    flex-direction: column;
+    margin: 26px 0;
+    row-gap: 10px;
+    font-size: 18px;
+  }
 
-    }
-
-    &__date {
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 12px;
-
-    }
-
-    &__avatar {
-        display: flex;
-    }
-
-    &__user {
-        font-size: 18px;
-    }
-
-    &__img {
-        width: 46px;
-        height: 46px;
-        border-radius: 25px;
-    }
-
-    &__text {
-        font-size: 13px;
-        color: #262626;
-        width: 682px;
-        line-height: 22px;
-        max-height: 45px;
-        overflow: hidden;
-
-    }
-
-    &__dark {
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 12px;
-        flex-grow: 1;
-    }
-
-    &__body {
-        display: flex;
-        flex-direction: column;
-        margin: 26px 0;
-        row-gap: 10px;
-        font-size: 18px;
-    }
-
-    &__edit {
-        font-size: 16px;
-        text-decoration: none;
-        color: rgba(82, 196, 26, 1);
-        border: 1px solid;
-        padding: 5px 10px;
-        border-radius: 6px;
-    }
+  &__edit {
+    font-size: 16px;
+    text-decoration: none;
+    color: rgba(82, 196, 26, 1);
+    border: 1px solid;
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
 }
