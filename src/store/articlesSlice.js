@@ -5,23 +5,19 @@ import BlogData from '../services/blog-data'
 const blogData = new BlogData()
 
 export const getArticles = createAsyncThunk('articles/getArticles', async function ({ page, token }) {
-  try {
-    const res = await blogData.getArticleList(page, token)
-    return res.result
-  } catch (error) {
-    console.error('Error fetching articles:', error)
-    throw error
+  const res = await blogData.getArticleList(page, token)
+  if (!res.ok) {
+    throw new Error()
   }
+  return res.result
 })
 
 export const getArticle = createAsyncThunk('articles/getArticle', async function (slug, token) {
-  try {
-    const res = await blogData.getArticle(slug, token)
-    return res.result
-  } catch (error) {
-    console.error('Error fetching article:', error)
-    throw error
+  const res = await blogData.getArticle(slug, token)
+  if (!res.ok) {
+    throw new Error()
   }
+  return res.result
 })
 
 const articlesSlice = createSlice({
@@ -45,6 +41,7 @@ const articlesSlice = createSlice({
     builder
       .addCase(getArticles.pending, (state) => {
         state.articlesLoading = true
+        state.articlesError = false
       })
       .addCase(getArticles.fulfilled, (state, action) => {
         state.articles = [...action.payload.articles]
@@ -53,9 +50,11 @@ const articlesSlice = createSlice({
       })
       .addCase(getArticles.rejected, (state) => {
         state.articlesError = true
+        state.articlesLoading = false
       })
       .addCase(getArticle.pending, (state) => {
         state.articlesLoading = true
+        state.articlesError = false
       })
       .addCase(getArticle.fulfilled, (state, action) => {
         state.article = action.payload.article
@@ -63,6 +62,7 @@ const articlesSlice = createSlice({
       })
       .addCase(getArticle.rejected, (state) => {
         state.articlesError = true
+        state.articlesLoading = false
       })
   },
 })
