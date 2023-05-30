@@ -7,10 +7,12 @@ const blogUser = new BlogUser()
 export const getCurrentUser = createAsyncThunk('user/getCurrentUser', async function (token) {
   try {
     const res = await blogUser.getCurrentUser(token)
+    if (!res.ok) {
+      throw new Error()
+    }
     return res
   } catch (error) {
-    console.error('Error fetching current user:', error)
-    throw error
+    throw new Error(error.message)
   }
 })
 

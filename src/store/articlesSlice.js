@@ -5,19 +5,27 @@ import BlogData from '../services/blog-data'
 const blogData = new BlogData()
 
 export const getArticles = createAsyncThunk('articles/getArticles', async function ({ page, token }) {
-  const res = await blogData.getArticleList(page, token)
-  if (!res.ok) {
-    throw new Error()
+  try {
+    const res = await blogData.getArticleList(page, token)
+    if (!res.ok) {
+      throw new Error('Failed to fetch articles')
+    }
+    return res.result
+  } catch (error) {
+    throw new Error(error.message)
   }
-  return res.result
 })
 
 export const getArticle = createAsyncThunk('articles/getArticle', async function (slug, token) {
-  const res = await blogData.getArticle(slug, token)
-  if (!res.ok) {
-    throw new Error()
+  try {
+    const res = await blogData.getArticle(slug, token)
+    if (!res.ok) {
+      throw new Error('Failed to fetch article')
+    }
+    return res.result
+  } catch (error) {
+    throw new Error(error.message)
   }
-  return res.result
 })
 
 const articlesSlice = createSlice({

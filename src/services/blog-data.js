@@ -9,10 +9,8 @@ export default class BlogData {
         },
       })
       const result = await res.json()
-      console.log(result)
       return { ok: res.ok, result: result }
     } catch (error) {
-      console.error(error)
       return { ok: false, error: error.message }
     }
   }
@@ -25,10 +23,8 @@ export default class BlogData {
         },
       })
       const result = await res.json()
-      console.log(result)
       return { ok: res.ok, result: result }
     } catch (error) {
-      console.error(error)
       return { ok: false, error: error.message }
     }
   }
@@ -46,7 +42,6 @@ export default class BlogData {
       const result = await res.json()
       return { ok: res.ok, result: result }
     } catch (error) {
-      console.error(error)
       return { ok: false, error: error.message }
     }
   }
@@ -64,7 +59,6 @@ export default class BlogData {
       const result = await res.json()
       return { ok: res.ok, result: result }
     } catch (error) {
-      console.error(error)
       return { ok: false, error: error.message }
     }
   }
@@ -79,7 +73,6 @@ export default class BlogData {
       })
       return { ok: res.ok }
     } catch (error) {
-      console.error(error)
       return { ok: false, error: error.message }
     }
   }
@@ -95,7 +88,6 @@ export default class BlogData {
       const result = await res.json()
       return { ok: res.ok, result: result }
     } catch (error) {
-      console.error(error)
       return { ok: false, error: error.message }
     }
   }
@@ -111,7 +103,6 @@ export default class BlogData {
       const result = await res.json()
       return { ok: res.ok, result: result }
     } catch (error) {
-      console.error(error)
       return { ok: false, error: error.message }
     }
   }
