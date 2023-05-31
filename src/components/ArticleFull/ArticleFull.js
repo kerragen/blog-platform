@@ -20,11 +20,12 @@ const ArticleFull = () => {
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-    dispatch(getArticle(slug, token))
+    dispatch(getArticle({ slug, token }))
     return () => {
       dispatch(setArticle())
     }
   }, [dispatch, slug, token])
+  console.log(article)
   return (
     <div className={classes.articleFull}>
       {articlesLoading && <Spin className={classes.articlesSpin} size="large" />}

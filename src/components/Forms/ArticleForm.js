@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useState, useContext } from 'react'
@@ -7,6 +6,7 @@ import { useSelector } from 'react-redux'
 
 import { MessageContext } from '../Layout/Layout'
 import BlogData from '../../services/blog-data'
+import { PATH_ARTICLES } from '../../path/path'
 
 import classes from './ArticleForm.module.scss'
 
@@ -20,11 +20,7 @@ const ArticleForm = ({ edit }) => {
   const { pushMessage } = useContext(MessageContext)
   const location = useLocation()
 
-  const tagList = edit
-    ? location.state.tagList.map((e) => ({
-        value: e,
-      }))
-    : null
+  const tagList = edit ? location.state.tagList.map((e) => ({ value: e })) : []
 
   const {
     register,
@@ -68,7 +64,7 @@ const ArticleForm = ({ edit }) => {
 
     if (res.ok) {
       setLoading(false)
-      navigate(`/articles/${res.result.article.slug}`)
+      navigate(`${PATH_ARTICLES}/${res.result.article.slug}`)
       pushMessage('success', edit ? 'Article updated' : 'Article created')
     } else {
       pushMessage('error', edit ? 'Article failed to update' : 'Article failed to create')

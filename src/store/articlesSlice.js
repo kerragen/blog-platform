@@ -16,7 +16,7 @@ export const getArticles = createAsyncThunk('articles/getArticles', async functi
   }
 })
 
-export const getArticle = createAsyncThunk('articles/getArticle', async function (slug, token) {
+export const getArticle = createAsyncThunk('articles/getArticle', async function ({ slug, token }) {
   try {
     const res = await blogData.getArticle(slug, token)
     if (!res.ok) {

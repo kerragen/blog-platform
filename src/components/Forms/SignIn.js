@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import BlogUser from '../../services/blog-user'
 import { getCurrentUser } from '../../store/userSlice'
 import { MessageContext } from '../Layout/Layout'
+import { PATH_HOME_PAGE, PATH_SIGN_UP } from '../../path/path'
 
 import classes from './ArticleForm.module.scss'
 
@@ -52,7 +53,7 @@ const SignIn = () => {
     if (res.ok) {
       localStorage.setItem('token', res.result.user.token)
       setLoading(false)
-      dispatch(getCurrentUser(localStorage.getItem('token'))).then(navigate('/', { replace: true }))
+      dispatch(getCurrentUser(localStorage.getItem('token'))).then(navigate(PATH_HOME_PAGE, { replace: true }))
       pushMessage('success', 'You are logged in')
     }
   }
@@ -99,7 +100,7 @@ const SignIn = () => {
           </Button>
           <p className={classes.form__tip}>
             Don&#39;t have an account?{' '}
-            <Link to="/sign-up" className={classes.form__link}>
+            <Link to={PATH_SIGN_UP} className={classes.form__link}>
               Sign Up.
             </Link>
           </p>

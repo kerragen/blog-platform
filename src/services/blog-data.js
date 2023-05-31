@@ -23,6 +23,7 @@ export default class BlogData {
         },
       })
       const result = await res.json()
+      console.log(result)
       return { ok: res.ok, result: result }
     } catch (error) {
       return { ok: false, error: error.message }

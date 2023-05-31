@@ -5,6 +5,7 @@ import { Checkbox, Button } from 'antd'
 
 import BlogUser from '../../services/blog-user'
 import { MessageContext } from '../Layout/Layout'
+import { PATH_SIGN_IN } from '../../path/path'
 
 import classes from './ArticleForm.module.scss'
 
@@ -63,7 +64,7 @@ const SignUp = () => {
     }
 
     if (res.ok) {
-      navigate('/sign-in', { replace: true })
+      navigate(PATH_SIGN_IN, { replace: true })
       pushMessage('success', 'You are registered')
     }
   }
@@ -158,7 +159,7 @@ const SignUp = () => {
           </Button>
           <p className={classes.form__tip}>
             Already have an account?{' '}
-            <Link to="/sign-in" className={classes.form__link}>
+            <Link to={PATH_SIGN_IN} className={classes.form__link}>
               Sign In.
             </Link>
           </p>

@@ -1,6 +1,3 @@
-/* eslint-disable react/no-children-prop */
-/* eslint-disable prettier/prettier */
-/* eslint-disable indent */
 import { Link, useNavigate } from 'react-router-dom'
 import { format } from 'date-fns'
 import ReactMarkdown from 'react-markdown'
@@ -10,6 +7,7 @@ import { Button, Popconfirm } from 'antd'
 
 import { MessageContext } from '../Layout/Layout'
 import BlogData from '../../services/blog-data'
+import { PATH_HOME_PAGE, PATH_SIGN_IN, PATH_ARTICLES, PATH_EDIT_ARTICLE } from '../../path/path'
 
 import classes from './Article.module.scss'
 import Like from './Like'
@@ -17,6 +15,10 @@ import Like from './Like'
 const Article = ({ title, author, tagList, body, description, favorited, favoritesCount, slug, updatedAt, full }) => {
   const [likes, setLikes] = useState(favoritesCount)
   const [liked, setLiked] = useState(favorited)
+  const [avatarError, setAvatarError] = useState(false)
+  const handleAvatarError = () => {
+    setAvatarError(true)
+  }
 
   const blogData = new BlogData()
   const navigate = useNavigate()
@@ -42,7 +44,7 @@ const Article = ({ title, author, tagList, body, description, favorited, favorit
   const deleteArticle = async () => {
     const res = await blogData.deleteArticle(token, slug)
     if (res.ok) {
-      navigate('/', { replace: true })
+      navigate(PATH_HOME_PAGE, { replace: true })
       pushMessage('success', 'Article was deleted')
     } else {
       pushMessage('error', 'Fail to delete article')
@@ -58,6 +60,7 @@ const Article = ({ title, author, tagList, body, description, favorited, favorit
       } else {
         pushMessage('error', 'Failed to like')
       }
+      console.log(res)
     } else if (!liked) {
       const res = await blogData.favoriteArticle(token, slug)
       if (res.ok) {
@@ -66,6 +69,16 @@ const Article = ({ title, author, tagList, body, description, favorited, favorit
       } else {
         pushMessage('error', 'Failed to like')
       }
+      console.log(res)
+    }
+  }
+
+  const onFavoriteClick = () => {
+    if (token) {
+      toggleFavorite()
+    } else {
+      navigate(PATH_SIGN_IN)
+      pushMessage('info', 'You must be logged in for this action')
     }
   }
 
@@ -85,23 +98,12 @@ const Article = ({ title, author, tagList, body, description, favorited, favorit
           {full ? (
             <span className={classes.article__title}>{title}</span>
           ) : (
-            <Link className={classes.article__title} to={`/articles/${slug}`}>
+            <Link className={classes.article__title} to={`${PATH_ARTICLES}/${slug}`}>
               {title}
             </Link>
           )}
           <span className={classes.article__likes}>
-            <button
-              onClick={
-                token
-                  ? toggleFavorite
-                  : // eslint-disable-next-line prettier/prettier
-                    () => {
-                      navigate('/sign-in')
-                      pushMessage('info', 'You must be logged in for this action')
-                    }
-              }
-              className={classes.article__like}
-            >
+            <button onClick={onFavoriteClick} className={classes.article__like}>
               <Like liked={liked} />
             </button>
             {likes}
@@ -115,7 +117,15 @@ const Article = ({ title, author, tagList, body, description, favorited, favorit
               <p className={classes.article__date}>{format(new Date(updatedAt), 'MMMM dd, yyyy')}</p>
             </span>
             <div className={classes.article__avatar}>
-              <img className={classes.article__img} src={author.image} alt="Аватар"></img>
+              {avatarError ? (
+                <img
+                  className={classes.article__img}
+                  src="https://static.productionready.io/images/smiley-cyrus.jpg"
+                  alt="Аватар"
+                ></img>
+              ) : (
+                <img className={classes.article__img} onError={handleAvatarError} src={author.image} alt="Аватар"></img>
+              )}
             </div>
           </div>
         </div>
@@ -126,7 +136,7 @@ const Article = ({ title, author, tagList, body, description, favorited, favorit
         {full && username === author.username && (
           <Link
             className={classes.article__edit}
-            to={`/articles/${slug}/edit`}
+            to={`${PATH_ARTICLES}/${slug}${PATH_EDIT_ARTICLE}`}
             state={{ body, description, tagList, title, slug }}
           >
             Edit
@@ -134,7 +144,7 @@ const Article = ({ title, author, tagList, body, description, favorited, favorit
         )}
       </div>
 
-      {full && <ReactMarkdown className={classes.article__body} children={body} />}
+      {full && <ReactMarkdown className={classes.article__body}>{body}</ReactMarkdown>}
     </div>
   )
 }

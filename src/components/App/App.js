@@ -12,8 +12,18 @@ import EditUser from '../Forms/EditUser'
 import ArticleForm from '../Forms/ArticleForm'
 import ReqAuth from '../HOC/ReqAuth'
 import Error404 from '../Errors/Error404'
-
 import './App.scss'
+import {
+  PATH_ANY,
+  PATH_ARTICLE,
+  PATH_ARTICLES,
+  PATH_FULL_EDIT_ARTICLE,
+  PATH_HOME_PAGE,
+  PATH_NEW_ARTICLE,
+  PATH_PROFILE,
+  PATH_SIGN_IN,
+  PATH_SIGN_UP,
+} from '../../path/path'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -30,12 +40,12 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path={PATH_HOME_PAGE} element={<Layout />}>
           <Route index element={<ArticleList />} />
-          <Route path="articles" element={<ArticleList />} />
-          <Route path="articles/:slug" element={<ArticleFull />} />
+          <Route path={PATH_ARTICLES} element={<ArticleList />} />
+          <Route path={PATH_ARTICLE} element={<ArticleFull />} />
           <Route
-            path="sign-in"
+            path={PATH_SIGN_IN}
             element={
               <ReqAuth auth={true}>
                 <SignIn />
@@ -43,7 +53,7 @@ const App = () => {
             }
           />
           <Route
-            path="sign-up"
+            path={PATH_SIGN_UP}
             element={
               <ReqAuth auth={true}>
                 <SignUp />
@@ -51,7 +61,7 @@ const App = () => {
             }
           />
           <Route
-            path="profile"
+            path={PATH_PROFILE}
             element={
               <ReqAuth auth={false}>
                 <EditUser />
@@ -59,7 +69,7 @@ const App = () => {
             }
           />
           <Route
-            path="new-article"
+            path={PATH_NEW_ARTICLE}
             element={
               <ReqAuth auth={false}>
                 <ArticleForm edit={false} />
@@ -67,14 +77,14 @@ const App = () => {
             }
           />
           <Route
-            path="articles/:slug/edit"
+            path={PATH_FULL_EDIT_ARTICLE}
             element={
               <ReqAuth auth={false}>
                 <ArticleForm edit={true} />
               </ReqAuth>
             }
           />
-          <Route path="*" element={<Error404 />} />
+          <Route path={PATH_ANY} element={<Error404 />} />
         </Route>
       </Routes>
     </>
